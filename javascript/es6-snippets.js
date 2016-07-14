@@ -45,3 +45,45 @@ console.log(person.greet()); // Mi nombre es Luis Camargo, tengo 23 años... \n 
 ///////////////
 // Funciones //
 ///////////////
+
+// Función de una linea con "return" implicito
+// Y sin () por ser solo un parametro
+const myFunction = text => console.log(text);
+
+const myFunctionTwo = (param1, param2 = 'test') => {
+	console.log(param1);
+
+	return param2; // test
+}
+
+// Old way
+function myNormalFunction() {
+	this.test = 'variable local';
+	this.other = 'Otra variable local';
+
+	// Copia del this
+	let self = this;
+
+	// Otro bloque de funcion
+	setTimeout(function() {
+		console.log(this.test); // undefined
+		console.log(self.test); // variable local
+	}, 100);
+
+	setTimeout(() => {
+		console.log(this.other); // Otra variable local
+	}, 50);
+}
+
+/*
+	Este console.log regresara:
+	1. 'test' => Es el parametro por default de la función que regrese en el return
+	2. 'hola' => Parametro enviado
+ */
+console.log(myFunctionTwo('hola'));
+
+// Definimos una nueva instancia de la funcion
+var normalFunction = new myNormalFunction();
+
+// Function anonima sin parametros
+console.log( () => 'Hola mundo!' ); // Hola mundo
